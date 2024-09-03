@@ -1,9 +1,9 @@
 - Class: meta
-  Course: Econometrics
+  Course: Data Science for Economics
   Lesson: Introduction to R
-  Author: Nick Huntington-Klein
+  Author: Kyle Coombs, adapted from Nick Huntington-Klein
   Type: Standard
-  Organization: Seattle University
+  Organization: Bates College
   Version: 2.4.5
 
 - Class: text
