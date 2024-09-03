@@ -1,0 +1,165 @@
+- Class: meta
+  Course: Data Science for Economists
+  Lesson: GGPlot2 Demo
+  Author: Kyle Coombs
+  Type: Standard
+  Organization: Bates College
+  Version: 1.0.0
+
+- Class: text
+  Output: |- 
+   This is your first swirl in Data Science for Economists. We're going to be using R most of the time in this class, so it's important to get comfortable with it.
+
+   Today we're going to start with a fun demo of the ggplot2 package, which is a powerful tool for making graphs in R.
+
+   We'll get into nuts and bolts of R in a more detailed, future swirl. Today is just about doing something cool with R! 
+   
+   This lesson is taken from a lecture example by Grant McDermott at the University of Oregon. We'll explore the relationship between GDP and life expectancy using the gapminder dataset. 
+
+   We'll use both the ggplot and gapminder packages.
+   
+   If you get stuck, you can skip a question (and see the answer) by writing skip(). But use this sparingly or you won't learn anything! In future lessons, you'll submit a log of your work to GitHub, so I can record the number of skips used. 
+
+- Class: text
+  Output: |-
+    First we need to install a package! Recall that we needed to install swirl with install.packages('swirl') to get here. Specifically, we'll use the ggplot2 and gapminder packages. If you do not yet have installed exit this demo, go back and install it with install.packages(c('ggplot2','gapminder')).
+
+- Class: text
+  Output: |-
+    Now that we have the package installed, let's load it.
+
+- Class: cmd_question
+  Output: |- 
+   Load the ggplot2 package using the library(package) function, i.e. library(ggplot2).
+  CorrectAnswer: library(ggplot2)
+  AnswerTests: ifelse(require('ggplot2'),TRUE,FALSE)
+  Hint: Type library(ggplot2).
+
+- Class: cmd_question
+  Output: |- 
+   Now do the same with gapminder! Can you figure it out? 
+  CorrectAnswer: library(gapminder)
+  AnswerTests: ifelse(require('gapminder'),TRUE,FALSE)
+  Hint: Type library(gapminder).
+
+- Class: text
+  Output: |-
+    Notice that we did not need the quotation marks around the package name when loading the package. R now recognises these packages as defined objects with given names. 
+
+    PS — A convenient way to combine the package installation and loading steps is with the [pacman package's](https://github.com/trinker/pacman) `p_load()` function. If you run `pacman::p_load(ggplot, gapminder)` it will first look to see whether it needs to install either package before loading them. Clever.
+
+- Class: text
+  Output: |-
+    Now that we have the packages installed and loaded, we need to write some code to use the data.
+
+    Go to chat.openai.com and ask ChatGPT to provide you with the code to load the gapminder dataset and plot a scatterplot of GDP per capita against life expectancy in R. 
+
+- Class: cmd_question
+  Output: |- 
+   Let's load in the gapminder data. Did ChatGPT give you any hints for this step?
+  CorrectAnswer: data('gapminder')
+  AnswerTests: omnitest(correctExpr="data('gapminder')")
+  Hint: Type data('gapminder').
+
+- Class: cmd_question
+  Output: |- 
+    Huh. Where is that data set you just loaded in? Check the environment tab in RStudio. What do you think you could type to see the data? Type it here. 
+  CorrectAnswer: gapminder
+  AnswerTests: omnitest(correctExpr="gapminder")
+  Hint: Type gapminder.
+
+- Class: cmd_question
+  Output: |- 
+   Now that we have the data loaded, let's plot it. 
+   
+   A ggplot object has two main components: the data and the aesthetic mappings arguments. The data is self-explanatory, but the aesthetic mapping is a bit more complex. It is defined by the aes() function, which takes the x, y, color, shape, and size of the data points based on variables in your data. Confused? Fair that takes time to appreciate. 
+
+   Today, we're focusing on having code that runs. In time, you'll understand how to work the intricacies of R for your own benefit. 
+   
+   Use the ggplot() function to create a scatterplot of GDP per capita against life expectancy. 
+
+   Type ggplot(data = gapminder, aes(x = gdpPercap, y = lifeExp)) + geom_point()
+  CorrectAnswer: ggplot(data = gapminder, aes(x = gdpPercap, y = lifeExp)) + geom_point()
+  AnswerTests: omnitest(correctExpr="ggplot(data = gapminder, aes(x = gdpPercap, y = lifeExp)) + geom_point()")
+  Hint: Type ggplot(data = gapminder, aes(x = gdpPercap, y = lifeExp)) + geom_point().
+
+- Class: text
+  Output: |-
+    Great! We've made a scatterplot of GDP per capita against life expectancy. 
+
+    Now let's add some color to the plot. We can use the `color` aesthetic to color the points by continent. This will also go in the aes() function.
+  CorrectAnswer: ggplot(data = gapminder, aes(x = gdpPercap, y = lifeExp, color = continent)) + geom_point()
+  AnswerTests: omnitest(correctExpr="ggplot(data = gapminder, aes(x = gdpPercap, y = lifeExp, color = continent)) + geom_point()")
+  Hint: Color is an aesthetic and goes in aes() under the argument color, ie. aes(color='something') If you listed variables for 'x' and 'y' in aes() before what could you add to color the points by continent?
+
+- Class: text
+  Output: |-
+    Hey, not bad! But it seems like the relationship is not strictly linear. That makes sense! An additional dollar of GDP per capita probably is not associated with the same increase in life expectancy at different levels of GDP per capita. For example, if GDP per capita were $1, that'd be a doubling of GDP per capita, but if GDP per capita were $100,000, that'd be a 0.001% increase. This is an example of diminishing marginal returns.
+
+    Sometimes use logarithms to model relationships with dimininshing marginal returns. Let's figure out how to do get ggplot to use a log scale. 
+
+- Class: cmd_question
+  Output: |-
+    First, let's save the ggplot object to a variable. This will allow us to call it later and change it without having to re-type all that code.
+
+    Save the ggplot object to a variable called p using the syntax p = ggplot(data = gapminder, aes(x = gdpPercap, y = lifeExp, color = continent)) + geom_point() or p <- ggplot(data = gapminder, aes(x = gdpPercap, y = lifeExp, color = continent)) + geom_point().
+  CorrectAnswer: p <- ggplot(data = gapminder, aes(x = gdpPercap, y = lifeExp, color = continent)) + geom_point()
+  AnswerTests: any_of_exprs('p = ggplot(data = gapminder, aes(x = gdpPercap, y = lifeExp, color = continent)) + geom_point()', 'p <- ggplot(data = gapminder, aes(x = gdpPercap, y = lifeExp, color = continent)) + geom_point()')
+  
+  Hint: Type p <- ggplot(data = gapminder, aes(x = gdpPercap, y = lifeExp, color = continent)) + geom_point().
+
+- Class: cmd_question
+  Output: |- 
+    Cool so now we have an object p that contains our ggplot object. Type it to see the plot.
+  CorrectAnswer: p
+  AnswerTests: omnitest(correctExpr="p")
+  Hint: Type p.
+
+- Class: text
+  Output: |- 
+    Now let's add a logarithmic scale to the x-axis. Check with ChatGPT how you might do this with ChatGPT.  
+
+- Class: cmd_question
+  Output: |-
+    You likely got tons of different suggestions. The one I'm looking for is scale_x_log10(). Add that to the ggplot object p to get a log scale on the x-axis. Literally p + scale_x_log10().
+  CorrectAnswer: p + scale_x_log10()
+  AnswerTests: omnitest(correctExpr="p + scale_x_log10()")
+  Hint: Type p + scale_x_log10().
+
+- Class: text
+  Output: |-
+    Now the relationship looks almost linear! Nice! Think about other ways you could have accomplished this and let's circle back to the lecture. 
+
+# ---
+# # R code example (linear regression)
+
+# ```{r fit}
+# fit = lm(mpg ~ wt, data = mtcars)
+# summary(fit)
+# ```
+
+# ---
+# # Base R plot
+
+# ```{r mtcars_baseplot, dev="svg"}
+# par(mar = c(4, 4, 1, .1)) ## Just for nice plot margins on this slide deck
+# plot(mtcars$wt, mtcars$mpg)
+# abline(fit, col = "red") # Add in the object fit from before! 
+# ```
+
+# ---
+# # ggplot2
+
+# ```{r mtcars_ggplot, dev="svg"}
+# library(ggplot2)
+# ggplot(data = mtcars, aes(x = wt, y = mpg)) + 
+#   geom_smooth(method = "lm", col = "red") + 
+#   geom_point() 
+# ```
+
+# - Class: mult_question
+#   Output: Would you like to save the log of this lesson so you can commit it to GitHub?
+#   AnswerChoices: Yes;No
+#   CorrectAnswer: NULL
+#   AnswerTests: saveLog()
+#   Hint: hint
