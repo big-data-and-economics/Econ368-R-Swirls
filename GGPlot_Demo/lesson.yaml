@@ -157,17 +157,17 @@
 #   geom_point() 
 # ```
 
-- Class: mult_question
-  Output: Would you like to submit the log of this lesson to Google Forms so
-    that your instructor may evaluate your progress?
-  AnswerChoices: Yes;No
-  CorrectAnswer: NULL
-  AnswerTests: submit_log()
-  Hint: hint
-
 # - Class: mult_question
-#   Output: Would you like to save the log of this lesson so you can commit it to GitHub?
+#   Output: Would you like to submit the log of this lesson to Google Forms so
+#     that your instructor may evaluate your progress?
 #   AnswerChoices: Yes;No
 #   CorrectAnswer: NULL
-#   AnswerTests: saveLog()
+#   AnswerTests: submit_log()
 #   Hint: hint
+
+- Class: mult_question
+  Output: Would you like to save the log of this lesson so you can commit it to GitHub?
+  AnswerChoices: Yes;No
+  CorrectAnswer: NULL
+  AnswerTests: saveLog()
+  Hint: hint
