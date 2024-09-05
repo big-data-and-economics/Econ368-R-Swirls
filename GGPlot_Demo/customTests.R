@@ -57,5 +57,4 @@ submit_log <- function(){
   write.csv(log_tbl, file = filename, row.names = FALSE)
   encoded_log <- base64encode(filename)
   browseURL(paste0(pre_fill_link, encoded_log))
-  # output_hash='InVzZXIiLCJjb3Vyc2VfbmFtZSIsImxlc3Nvbl9uYW1lIiwicXVlc3Rpb25fbnVtYmVyIiwiY29ycmVjdCIsImF0dGVtcHQiLCJza2lwcGVkIiwiZW5jb2RlZF9za2lwIiwiZGF0ZXRpbWUiDQoiYXV0aG9yIiwiRGF0YSBTY2llbmNlIGZvciBFY29ub21pc3RzIiwiR0dQbG90MiBEZW1vIiwxNixUUlVFLDEsRkFMU0UsIkFBPT0iLDE3MjU1Mzg0NTQuOTYwNDgNCiJhdXRob3IiLCJEYXRhIFNjaWVuY2UgZm9yIEVjb25vbWlzdHMiLCJHR1Bsb3QyIERlbW8iLDE4LE5BLDEsTkEsIkFBPT0iLDE3MjU1Mzg0NTcuODU0MTgNCg=='
 }
