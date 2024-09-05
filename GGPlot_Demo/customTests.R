@@ -50,9 +50,12 @@ submit_log <- function(){
                         correct = p(log_$correct, nrow_, NA),
                         attempt = p(log_$attempt, nrow_, NA),
                         skipped = p(log_$skipped, nrow_, NA),
-                        encoded_skip = ifelse(is.na(log_$skipped),NA,base64encode(log_$skipped)),
                         datetime = p(log_$datetime, nrow_, NA),
                         stringsAsFactors = FALSE)
+  # Set column of data.frame equal to vector, so each row is an element of the vector
+
+
+  log_tbl[['encoded_skip']] <- sapply(log_tbl$skipped,base64encode)
   filename = paste("swirl_log", log_tbl$user[1], log_tbl$course_name[1], log_tbl$lesson_name[1], ".csv", sep = "_")
   write.csv(log_tbl, file = filename, row.names = FALSE)
   encoded_log <- base64encode(filename)
