@@ -28,3 +28,33 @@ saveLog <- function(){
   log[['encoded_skip']] <- base64encode(log$skipped)
   save(log, file = "log.Rdata")
 }
+
+submit_log <- function(){
+  
+  # Please edit the link below
+  pre_fill_link <- "https://docs.google.com/forms/d/e/1FAIpQLSdkRFTcPE9P0CgbZ4jvI8JJMZwDhC0Lmw99vbPlge8FjFV3WQ/viewform?usp=pp_url&entry.792538263="
+  
+  # Do not edit the code below
+  if(!grepl("=$", pre_fill_link)){
+    pre_fill_link <- paste0(pre_fill_link, "=")
+  }
+  
+  p <- function(x, p, f, l = length(x)){if(l < p){x <- c(x, rep(f, p - l))};x}
+  
+  log_ <- getLog()
+  nrow_ <- max(unlist(lapply(log_, length)))
+  log_tbl <- data.frame(user = rep(log_$user, nrow_),
+                        course_name = rep(log_$course_name, nrow_),
+                        lesson_name = rep(log_$lesson_name, nrow_),
+                        question_number = p(log_$question_number, nrow_, NA),
+                        correct = p(log_$correct, nrow_, NA),
+                        attempt = p(log_$attempt, nrow_, NA),
+                        skipped = p(log_$skipped, nrow_, NA),
+                        encoded_skip = ifelse(is.na(log_$skipped),NA,base64encode(log_$skipped)),
+                        datetime = p(log_$datetime, nrow_, NA),
+                        stringsAsFactors = FALSE)
+  write.csv(log_tbl, file = 'log.csv', row.names = FALSE)
+  encoded_log <- base64encode('log.csv')
+  browseURL(paste0(pre_fill_link, encoded_log))
+  # output_hash='InVzZXIiLCJjb3Vyc2VfbmFtZSIsImxlc3Nvbl9uYW1lIiwicXVlc3Rpb25fbnVtYmVyIiwiY29ycmVjdCIsImF0dGVtcHQiLCJza2lwcGVkIiwiZW5jb2RlZF9za2lwIiwiZGF0ZXRpbWUiDQoiYXV0aG9yIiwiRGF0YSBTY2llbmNlIGZvciBFY29ub21pc3RzIiwiR0dQbG90MiBEZW1vIiwxNixUUlVFLDEsRkFMU0UsIkFBPT0iLDE3MjU1Mzg0NTQuOTYwNDgNCiJhdXRob3IiLCJEYXRhIFNjaWVuY2UgZm9yIEVjb25vbWlzdHMiLCJHR1Bsb3QyIERlbW8iLDE4LE5BLDEsTkEsIkFBPT0iLDE3MjU1Mzg0NTcuODU0MTgNCg=='
+}

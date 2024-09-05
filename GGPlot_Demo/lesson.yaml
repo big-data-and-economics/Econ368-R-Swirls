@@ -130,44 +130,17 @@
   Output: |-
     Now the relationship looks almost linear! Nice! Think about other ways you could have accomplished this and let's circle back to the lecture. 
 
-# ---
-# # R code example (linear regression)
-
-# ```{r fit}
-# fit = lm(mpg ~ wt, data = mtcars)
-# summary(fit)
-# ```
-
-# ---
-# # Base R plot
-
-# ```{r mtcars_baseplot, dev="svg"}
-# par(mar = c(4, 4, 1, .1)) ## Just for nice plot margins on this slide deck
-# plot(mtcars$wt, mtcars$mpg)
-# abline(fit, col = "red") # Add in the object fit from before! 
-# ```
-
-# ---
-# # ggplot2
-
-# ```{r mtcars_ggplot, dev="svg"}
-# library(ggplot2)
-# ggplot(data = mtcars, aes(x = wt, y = mpg)) + 
-#   geom_smooth(method = "lm", col = "red") + 
-#   geom_point() 
-# ```
-
-# - Class: mult_question
-#   Output: Would you like to submit the log of this lesson to Google Forms so
-#     that your instructor may evaluate your progress?
-#   AnswerChoices: Yes;No
-#   CorrectAnswer: NULL
-#   AnswerTests: submit_log()
-#   Hint: hint
-
 - Class: mult_question
-  Output: Would you like to save the log of this lesson so you can commit it to GitHub?
+  Output: Would you like to submit the log of this lesson to Google Forms so
+    that your instructor may evaluate your progress?
   AnswerChoices: Yes;No
   CorrectAnswer: NULL
-  AnswerTests: saveLog()
+  AnswerTests: submit_log()
   Hint: hint
+
+# - Class: mult_question
+#   Output: Would you like to save the log of this lesson so you can commit it to GitHub?
+#   AnswerChoices: Yes;No
+#   CorrectAnswer: NULL
+#   AnswerTests: saveLog()
+#   Hint: hint
