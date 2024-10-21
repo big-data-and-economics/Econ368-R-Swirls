@@ -284,3 +284,11 @@
   CorrectAnswer: coefplot(list(ols, fe_lsdv, fe_feols), keep = c('expp','lunch'))
   AnswerTests: omnitest(correctExpr='coefplot(list(ols, fe_lsdv, fe_feols), keep = c("expp","lunch"))')
   Hint: Take the take the list() provided and the keep = c('expp','lunch') option provided and feed them both to coefplot().
+
+- Class: mult_question
+  Output: Would you like to submit the log of this lesson to Google Forms so
+    that your instructor may evaluate your progress?
+  AnswerChoices: Yes;No
+  CorrectAnswer: NULL
+  AnswerTests: submit_log()
+  Hint: hint

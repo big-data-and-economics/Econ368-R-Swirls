@@ -372,6 +372,11 @@
     Thanks for following along with this regression discontinuity lesson!  
     
     If you found the research in this lesson interesting, here is a broader question for you to consider: Did our analysis identify the dangerous effects of alcohol or the dangerous effects of strict drinking age laws? Or is it difficult to tell?
-    
-    
-    
+        
+- Class: mult_question
+  Output: Would you like to submit the log of this lesson to Google Forms so
+    that your instructor may evaluate your progress?
+  AnswerChoices: Yes;No
+  CorrectAnswer: NULL
+  AnswerTests: submit_log()
+  Hint: hint
