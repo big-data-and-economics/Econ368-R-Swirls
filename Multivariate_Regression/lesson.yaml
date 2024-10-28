@@ -103,7 +103,7 @@
 
 - Class: cmd_question
   Output: |-
-   Let's say that Age, household income, depression, and television hours are all variables that are related to both sleep and bad health.
+   Let's say that Age, household income, depression, and television hours are all variables that are related to both sleep and health. BMI affects physical health. 
    
    Run a regression of DaysPhysHlthBad on SleepHrsNight and all the controls necessary to causally identify the effect of SleepHrsNight on DaysPhysHlthBad. Don't include any unnecessary controls! Save this regression as multi2.
   CorrectAnswer: multi2 <- feols(DaysPhysHlthBad ~ SleepHrsNight + Age + HHIncomeMid + Depressed + TVHrsDay, data = NHANES)
