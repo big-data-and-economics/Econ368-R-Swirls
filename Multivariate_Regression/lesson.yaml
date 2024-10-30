@@ -101,14 +101,9 @@
   AnswerTests: ifelse(exists('multi1'),class(multi1) == 'fixest' & length(names(coef(multi1))) >= 5 & !('DaysPhysHlthBad' %in% names(coef(multi1))), FALSE)
   Hint: You can regress Y on X, W, and Z using feols(Y~X+W+Z). Don't forget to add at least three other controls!
 
-- Class: figure
-  Output: Consider this diagram of the data-generating process. This diagram shows which variables are relevant to generating the obseved sleep and bad-health values, and how they cause each other, represented by arrows.
-  Figure: dag1.R
-  FigureType: new
-
 - Class: cmd_question
   Output: |-
-   Assume that the diagram is completely accurate and isn't missing anything.
+   Let's say that Age, household income, depression, and television hours are all variables that are related to both sleep and health. BMI affects physical health. 
    
    Run a regression of DaysPhysHlthBad on SleepHrsNight and all the controls necessary to causally identify the effect of SleepHrsNight on DaysPhysHlthBad. Don't include any unnecessary controls! Save this regression as multi2.
   CorrectAnswer: multi2 <- feols(DaysPhysHlthBad ~ SleepHrsNight + Age + HHIncomeMid + Depressed + TVHrsDay, data = NHANES)
